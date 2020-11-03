@@ -1,0 +1,3 @@
+include ':kakao-android-sdk-rx-2.0.2'
+include ':app'
+rootProject.name = "Macci"

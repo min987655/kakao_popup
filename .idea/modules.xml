@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Macci.iml" filepath="$PROJECT_DIR$/.idea/modules/Macci.iml" group="Macci" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Macci/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kakao-android-sdk-rx-2.0.2/kakao-android-sdk-rx-2.0.2.iml" filepath="$PROJECT_DIR$/.idea/modules/kakao-android-sdk-rx-2.0.2/kakao-android-sdk-rx-2.0.2.iml" group="Macci/kakao-android-sdk-rx-2.0.2" />
+    </modules>
+  </component>
+</project>
