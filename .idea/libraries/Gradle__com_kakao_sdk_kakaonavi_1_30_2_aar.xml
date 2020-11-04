@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: com.kakao.sdk:kakaonavi:1.30.2@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88fa98bd27dc9b09fcbda9ea6a79cae4/jetified-kakaonavi-1.30.2/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88fa98bd27dc9b09fcbda9ea6a79cae4/jetified-kakaonavi-1.30.2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88fa98bd27dc9b09fcbda9ea6a79cae4/jetified-kakaonavi-1.30.2/res" />
     </CLASSES>

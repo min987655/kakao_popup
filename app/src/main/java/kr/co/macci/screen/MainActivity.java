@@ -7,11 +7,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
-import android.service.voice.AlwaysOnHotwordDetector;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -23,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -48,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private String pageUrl = "http://testm.macci.co.kr/my";
 
     private RelativeLayout ivMySplash;
+    private ConstraintLayout webViewLayout;
 
     private BackPressHandler backPressHandler = new BackPressHandler(MainActivity.this);
 
@@ -68,40 +68,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initWebView(String locationPermission) {
+
         // 크롬에서 창 열기
         mWebView.setWebChromeClient(new WebChromeClient() {
-
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-                // Dialog Create Code
-                WebView newWebView = new WebView(mActivity);
+                WebView newWebView = new WebView(MainActivity.this);
+                webViewLayout = findViewById(R.id.rootView);
                 WebSettings webSettings = newWebView.getSettings();
                 webSettings.setJavaScriptEnabled(true);
+                webSettings.setSupportMultipleWindows(true);
+                webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 
-                final Dialog dialog = new Dialog(mActivity);
-                dialog.setContentView(newWebView);
+                webViewLayout.addView(newWebView);
 
-                ViewGroup.LayoutParams params = dialog.getWindow().getAttributes();
-                params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
-                dialog.show();
+//                final Dialog dialog = new Dialog(MainActivity.this);
+//                dialog.setContentView(newWebView);
+//                dialog.show();
+
                 newWebView.setWebChromeClient(new WebChromeClient() {
                     @Override
                     public void onCloseWindow(WebView window) {
-                        dialog.dismiss();
+//                        dialog.dismiss();
+                        webViewLayout.removeView(window);
                     }
                 });
 
-                // WebView Popup에서 내용이 안보이고 빈 화면만 보여 아래 코드 추가
-                newWebView.setWebViewClient(new WebViewClient() {
-                    @Override
-                    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                        return false;
-                    }
-                });
-
-                ((WebView.WebViewTransport)resultMsg.obj).setWebView(newWebView);
+                ((WebView.WebViewTransport) resultMsg.obj).setWebView(newWebView);
                 resultMsg.sendToTarget();
                 return true;
             }
@@ -118,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
         //WebView 셋팅
         mWebSettings = mWebView.getSettings();
         mWebSettings.setGeolocationEnabled(true); // GeoLocation 허용 코드
-        mWebSettings.setSupportMultipleWindows(false); // 새창 띄우기 허용 여부
-        mWebSettings.setJavaScriptCanOpenWindowsAutomatically(false); // 자바스크립트 새창 띄우기(멀티뷰) 허용 여부
+        mWebSettings.setSupportMultipleWindows(true); // 새창 띄우기 허용 여부
+        mWebSettings.setJavaScriptCanOpenWindowsAutomatically(true); // 자바스크립트 새창 띄우기(멀티뷰) 허용 여부
         mWebSettings.setLoadWithOverviewMode(true); // 메타태그 허용 여부
         mWebSettings.setUseWideViewPort(true); // 화면 사이즈 맞추기 허용 여부
         mWebSettings.setSupportZoom(false); // 화면 줌 허용 여부
